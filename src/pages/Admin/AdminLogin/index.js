@@ -11,18 +11,22 @@ const AdminLogin = () => {
     });
     const dispatch = useDispatch();
     const location = useLocation();
-    const { userInfo } = useSelector((state) => state.AuthReducer);
-    // su ly du lieu cac o input
+    const { userInfo, error } = useSelector((state) => state.AuthReducer);
+    console.log(error);
+    // Submit form
     const HandleLoginForm = (e) => {
         e.preventDefault();
         dispatch(Login(loginData));
     };
 
+    // Sử lý dữ liệu các ô input
     const onChangeInput = (e) => {
         const newLoginData = { ...loginData };
         newLoginData[e.target.name] = e.target.value;
         setLoginData(newLoginData);
     };
+
+    // Khi đăng nhập thành công chuyển qua trang admin products
     if (userInfo) {
         const { redirectTo } = qs.parse(location.search, {
             ignoreQueryPrefix: true,
@@ -30,13 +34,12 @@ const AdminLogin = () => {
         if (redirectTo) {
             return <Redirect to={redirectTo} />;
         }
-        return <Redirect to="/admin/product" />;
+        return <Redirect to="/admin/products" />;
     }
-    console.log(userInfo);
     return (
         <form style={{ width: "500px" }} onSubmit={HandleLoginForm}>
             <input type="text" name="email" style={{ display: "block" }} onChange={onChangeInput} />
-            <input type="password" name="password" style={{ display: "block" }} onChange={onChangeInput} />
+            <input type="text" name="password" style={{ display: "block" }} onChange={onChangeInput} />
             <button style={{ display: "block" }}>Submit</button>
         </form>
     );

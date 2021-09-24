@@ -3,7 +3,7 @@ const userInfo = localStorage.getItem(USER_INFO) ? JSON.parse(localStorage.getIt
 const initialState = {
     userInfo,
     isLoading: false,
-    error: null,
+    error: [],
 };
 export default function AuthReducer(state = initialState, action) {
     switch (action.type) {
@@ -18,6 +18,7 @@ export default function AuthReducer(state = initialState, action) {
             };
         }
         case LOGIN_FAILURE: {
+            console.log(state.error);
             return { ...state, isLoading: false, error: action.payload.error };
         }
         default:

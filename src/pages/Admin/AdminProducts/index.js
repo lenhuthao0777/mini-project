@@ -1,6 +1,6 @@
 import React from "react";
 
-const AdminProduct = () => {
+const AdminProducts = () => {
     return (
         <div style={{ marginLeft: "50px" }}>
             <h1 style={{ color: "brown" }}>TABLE PRODUCT</h1>
@@ -8,4 +8,4 @@ const AdminProduct = () => {
     );
 };
 
-export default AdminProduct;
+export default AdminProducts;

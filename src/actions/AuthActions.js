@@ -10,7 +10,7 @@ export function Login(values) {
         } catch (error) {
             dispatch({
                 type: LOGIN_FAILURE,
-                payload: { error: error.response.data },
+                payload: { error: error.response.data.message },
             });
         }
     };

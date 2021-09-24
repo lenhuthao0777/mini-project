@@ -1,11 +1,11 @@
-import AdminSwitch from "auth/AdminSwitch";
+import AdminRoute from "auth/AdminRoute";
 import AdminLayout from "layouts/AdminLayout";
 import AppLayout from "layouts/AppLayout";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 const Home = lazy(() => import("pages/Home"));
 const AdminLogin = lazy(() => import("pages/Admin/AdminLogin"));
-const AdminProduct = lazy(() => import("pages/Admin/AdminProducts"));
+const AdminProducts = lazy(() => import("pages/Admin/AdminProducts"));
 const AddProduct = lazy(() => import("pages/Admin/AdminFormAdd"));
 const NotFound = lazy(() => import("pages/NotFound"));
 function App() {
@@ -15,15 +15,15 @@ function App() {
                 <Switch>
                     <Route path="/admin">
                         <AdminLayout>
-                            <AdminSwitch>
-                                <Redirect exact from="/admin" to="/admin/product" />
-                                <Route path="/admin/product">
-                                    <AdminProduct />
-                                </Route>
-                                <Route path="/admin/add">
+                            <Switch>
+                                <Redirect exact from="/admin" to="/admin/products" />
+                                <AdminRoute path="/admin/products">
+                                    <AdminProducts />
+                                </AdminRoute>
+                                <AdminRoute path="/admin/add">
                                     <AddProduct />
-                                </Route>
-                            </AdminSwitch>
+                                </AdminRoute>
+                            </Switch>
                         </AdminLayout>
                     </Route>
                     <Route path="/admin-login">
